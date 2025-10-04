@@ -11,11 +11,10 @@ struct Sprocesso{
 };
 
 void executarSTR(struct Sprocesso processo[], int n){
-    //implementar a parte do STR: Charles
+
 
     printf("\n=== Escalonamento STR ===\n");
-    printf("\n=== Feito por Charles R. ===\n");
-
+  
     int finalizados = 0;
     int indiceMenor;
     int tempoProcessador = 0;
@@ -33,7 +32,7 @@ void executarSTR(struct Sprocesso processo[], int n){
             }
         }
 
-        //Se nao tiver processo pronto avança o tempo
+        //Se nao tiver processo pronto avanÃ§a o tempo
         if(indiceMenor == -1){
             printf("\nTempo %d:\n", tempoProcessador);
             printf("CPU: Ociosa\n");
@@ -96,7 +95,7 @@ int main()
         printf("Numero de processos excede o limite de %d.\n",MAX_PROCESSOS);
         return 1;
     }
-    //laço de repetição de acordo com o valor escolhido
+    //laÃ§o de repetiÃ§Ã£o de acordo com o valor escolhido
     for (int i = 0; i < qtsprocessos; i++){
         printf("\n processo %d:\n", i+1);
         printf("Nome: ");
@@ -108,7 +107,7 @@ int main()
         processos[i].tempo_restante = processos[i].tempo_cpu;
 
     }
-    //execução das escolhas
+    //execuÃ§Ã£o das escolhas
     if(opcao == 1){
 
         executarSTR(processos, qtsprocessos);
@@ -123,3 +122,4 @@ int main()
 
     return 0;
 }
+
