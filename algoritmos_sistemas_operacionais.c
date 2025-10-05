@@ -10,7 +10,7 @@ struct Sprocesso {
     int tempo_cpu;
     int tempo_restante;
 };
-
+//Joao v
 void imprimirTimelineSRT(int tempo, char* cpu, struct Sprocesso processo[], int n, int indiceAtual) {
     printf("\nTempo %d:\n", tempo);
     printf("CPU: %s\n", cpu);
@@ -46,7 +46,7 @@ void imprimirTimelineRR(int tempo, char* cpu, struct Sprocesso processo[], int i
     }
     printf("\n");
 }
-
+//Charles
 // Função STR
 void executarSTR(struct Sprocesso processo[], int n){
     printf("\n=== Escalonamento SRT ===\n");
@@ -88,7 +88,7 @@ void executarSTR(struct Sprocesso processo[], int n){
         }
     }
 }
-
+//Igor
 // Função Round-Robin 
 void executarRoundRobin(struct Sprocesso processo[], int n, int quantum) {
     printf("\n=== Escalonamento Round-Robin (quantum = %d) ===\n", quantum);
@@ -145,7 +145,7 @@ void executarRoundRobin(struct Sprocesso processo[], int n, int quantum) {
     }
 }
 
-
+//Hugo
 int main() {
     int qtsprocessos, opcao, quantum;
     struct Sprocesso processos[MAX_PROCESSOS];
@@ -187,3 +187,4 @@ int main() {
 
     return 0;
 }
+
