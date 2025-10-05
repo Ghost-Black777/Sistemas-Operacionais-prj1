@@ -14,7 +14,7 @@ void executarSTR(struct Sprocesso processo[], int n){
 
 
     printf("\n=== Escalonamento STR ===\n");
-  
+
     int finalizados = 0;
     int indiceMenor;
     int tempoProcessador = 0;
@@ -73,8 +73,69 @@ void executarSTR(struct Sprocesso processo[], int n){
     }
 }
 
-void execultarRoundRobin(struct Sprocesso processo[], int n, int quantum){
- // implementar a parte do round-Robin
+void execultarRoundRobin(struct Sprocesso processo[], int n, int quantum) {
+    printf("\n=== Escalonamento Round-Robin (quantum = %d) ===\n", quantum);
+
+    int tempoProcessador = 0;
+    int finalizados = 0;
+    int fila[MAX_PROCESSOS];
+    int inicioFila = 0, fimFila = 0;
+    for (int i = 0; i < n; i++) {
+        if (processo[i].tempo_chegada == 0) {
+            fila[fimFila++] = i;
+        }
+    }
+
+    while (finalizados < n) {
+
+        if (inicioFila == fimFila) {
+            printf("\nTempo %d:\n", tempoProcessador);
+            printf("CPU: Ociosa\n");
+            printf("Prontos: (nenhum)\n");
+            tempoProcessador++;
+
+            for (int i = 0; i < n; i++) {
+                if (processo[i].tempo_chegada == tempoProcessador) {
+                    fila[fimFila++] = i;
+                }
+            }
+            continue;
+        }
+
+        int atual = fila[inicioFila++];
+        int tempoExecutado = 0;
+
+        printf("\nTempo %d:\n", tempoProcessador);
+        printf("CPU: %s (restante %d)\n", processo[atual].nome, processo[atual].tempo_restante);
+
+        while (tempoExecutado < quantum && processo[atual].tempo_restante > 0) {
+            processo[atual].tempo_restante--;
+            tempoExecutado++;
+            tempoProcessador++;
+
+            for (int i = 0; i < n; i++) {
+                if (processo[i].tempo_chegada == tempoProcessador) {
+                    fila[fimFila++] = i;
+                }
+            }
+        }
+
+        printf("Prontos: ");
+        int temPronto = 0;
+        for (int i = inicioFila; i < fimFila; i++) {
+            printf("%s(restante %d) ", processo[fila[i]].nome, processo[fila[i]].tempo_restante);
+            temPronto = 1;
+        }
+        if (!temPronto) printf("(nenhum)");
+        printf("\n");
+
+        if (processo[atual].tempo_restante == 0) {
+            finalizados++;
+            printf(">> Processo %s terminou no tempo %d\n", processo[atual].nome, tempoProcessador);
+        } else {
+            fila[fimFila++] = atual;
+        }
+    }
 }
 
 int main()
@@ -122,4 +183,3 @@ int main()
 
     return 0;
 }
-
